@@ -11,7 +11,7 @@ myApp.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject
             'Steak & Potatoes',
             'Macaroni & Cheese',
             'Chicken Salad'
-        ]
+        ];
         var favoriteVacationDestinations = [
             'San Francisco, CA',
             'Paris France',
@@ -77,7 +77,7 @@ myApp.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject
                 $rootScope.currentUser = userObj
                 // $rootScope.currentUser.firstname = authUser.firstname
             } else {
-                $rootScope.currentUser = ""
+                $rootScope.currentUser = false;
             }
         })
 
@@ -88,10 +88,11 @@ myApp.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject
                     email: user.email,
                     password: user.password
                 }).then(function(registeredUser){
-                     $location.path('/success')
+
+                     $location.path('/success');
                     })
                     .catch(function(error) {
-                        $rootScope.message = error.message
+                        $rootScope.message = error.message;
                         console.log("Firebase auth Error: " + error)
                     })
 
@@ -100,7 +101,10 @@ myApp.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject
             },
 
             logout: function() {
-                return auth.$unauth()
+                $rootScope.currentUser = false;
+                $location.path('/login');
+                return auth.$unauth();
+
             },
 
             requireAuth: function() {
@@ -113,9 +117,12 @@ myApp.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject
                     password: user.password
                 }).then(function(registeredUser) {
 
-                    console.log("got the registered user! " + registeredUser)
-                    console.log("got id! " + registeredUser.uid)
-                    console.log("got the timestamp: " + Firebase.ServerValue.TIMESTAMP.toString())
+                    console.log("got the registered user! " + registeredUser);
+                    console.log("got id! " + registeredUser.uid);
+                    console.log("got the timestamp: " + Firebase.ServerValue.TIMESTAMP.toString());
+
+
+                    $rootScope.message = "Welcome " + user.firstname + ". Thanks for registering!";
 
 
                     var regRef = new Firebase(FIREBASE_URL + 'users')
@@ -150,7 +157,7 @@ myApp.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject
 
                         })
 
-                    $rootScope.message = "Welcome " + user.firstname + ". Thanks for registering!"
+
 
 
                 }).catch(function(error){

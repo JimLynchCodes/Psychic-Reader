@@ -1,7 +1,7 @@
 myApp.controller('RegistrationController', ['$scope',
     'Authentication', function($scope, Authentication) {
 
-    $scope.message = $scope.message
+   // $scope.message = $scope.message
 
     $scope.login = function() {
         Authentication.login($scope.user)
