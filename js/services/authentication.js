@@ -51,8 +51,8 @@ myApp.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject
             'Never finding your true love.',
             'Being sad and alone.',
             'Dieing.',
-            'Never fully understanding Javascript, but having to use it for a loooong time.'
-        ]
+            'Being a mediocre programmer your whole life.'
+        ];
         var skillsNeedToWorkOn = [
             'Try to be more in touch with your feelings.',
             'Be more considerate of others.',
